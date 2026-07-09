@@ -252,6 +252,22 @@ button{font-family:inherit; cursor:pointer; border:none;}
 }
 .write-actions{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;}
 
+/* ---------- Translate & speak ---------- */
+.tr-card{
+  background:linear-gradient(160deg,#fff,#eef7ff); border:3px solid #cfe6ff;
+  border-radius:20px; padding:18px 16px; margin:8px 0 10px; box-shadow:0 5px 0 #cfe6ff; text-align:center;
+}
+.tr-card .tr-en{font-size:1.5rem; font-weight:800; color:var(--ink); line-height:1.3;}
+.tr-result{min-height:8px; text-align:center; margin:8px 0; opacity:0; transition:opacity .2s;}
+.tr-result.show{opacity:1;}
+.tr-result .tr-ok{color:var(--green); font-weight:900; font-size:1.3rem;}
+.tr-result .tr-no{color:var(--orange); font-weight:900; font-size:1.2rem;}
+.tr-result .tr-hi{
+  font-family:'Tiro Devanagari Hindi','Nirmala UI',serif;
+  font-size:1.9rem; font-weight:900; color:var(--purple); margin-top:4px;
+}
+.tr-result .tr-heard{font-size:.82rem; opacity:.6; margin-top:2px;}
+
 /* date label on a day node (Myra wanted the real date) */
 .node .dnum.date{font-size:.92rem; font-weight:900; color:var(--purple); text-align:center; line-height:1.05;}
 .node.today .dnum.date{color:var(--pink);}

@@ -13,6 +13,9 @@ mastering every *maatra* (vowel sign) — with a strong focus on **pronunciation
   so it's a solid 15 minutes of reading — no more finishing in five!
 - **✍️ Trace &amp; write (~10 min).** Mithu says “letter + maatra” (e.g. *स पे बड़ी ई की मात्रा*),
   Myra traces the faint guide with her finger, and the app checks her handwriting and cheers her on.
+- **🗣️ Translate &amp; speak (~10 sentences).** She reads an easy English sentence and says it in
+  Hindi; the app **listens (🎤) and grades it**, then shows the answer. Sentences are built from the
+  day's own words, so they always use vocabulary she's met. Self-marks if the browser can't listen.
 - **Hear everything.** Tap any letter, word, or sentence to hear clear, slow Hindi (browser
   text-to-speech, `hi-IN`). Mithu the parrot 🦜 pronounces and cheers her on.
 - **Say it (🎤).** Optional speech practice — Myra taps the mic and says the word; always
@@ -24,7 +27,7 @@ mastering every *maatra* (vowel sign) — with a strong focus on **pronunciation
 
 ## A lesson, start to finish
 Meet the maatra → tap the syllables → read ~15 picture-words → **✍️ trace & write the letters** →
-play the day's game → ⭐ reward. About **25 minutes** of learning.
+play the day's game → **🗣️ translate 10 English sentences into spoken Hindi** → ⭐ reward.
 
 ## Curriculum map
 | Week | Days | Focus |
