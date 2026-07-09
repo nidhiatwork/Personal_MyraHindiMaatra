@@ -46,6 +46,18 @@
     return Math.min(APP.totalDays, Math.max(dateBased, pushed));
   }
 
+  /* ---------------- date labels (Myra wants real dates, not Day N) ------- */
+  const HI_MONTHS = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"];
+  const HI_MONTHS_SHORT = ["जन", "फ़र", "मार्च", "अप्रैल", "मई", "जून", "जुल", "अग", "सित", "अक्टू", "नव", "दिस"];
+  const HI_DOW = ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"];
+  const HI_DOW_SHORT = ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"];
+  function dateForDay(dayNum) {
+    const s = new Date(APP.startDate + "T00:00:00");
+    return new Date(s.getFullYear(), s.getMonth(), s.getDate() + (dayNum - 1));
+  }
+  function fmtDateShort(dt) { return dt.getDate() + " " + HI_MONTHS_SHORT[dt.getMonth()]; }
+  function fmtDateLong(dt) { return HI_DOW_SHORT[dt.getDay()] + ", " + dt.getDate() + " " + HI_MONTHS[dt.getMonth()]; }
+
   /* ------------------------------ Speech (TTS) --------------------------- */
   let hiVoice = null;
   function pickVoice() {
@@ -155,6 +167,109 @@
     return b;
   }
 
+  /* ======================================================================
+     HANDWRITING  —  trace a letter/maatra, then a real (lenient) check
+     • Prompts come from the day's syllables (letter + today's maatra),
+       the day's plain letters (day 1), or short words (review/word days).
+     • A faint guide is drawn to TRACE over. Assessment renders the target
+       glyph to offscreen masks and scores coverage + how much ink stayed
+       inside the letter — forgiving, always encouraging for a 5-year-old.
+     ==================================================================== */
+  const WRITE_FONT = "700 210px 'Tiro Devanagari Hindi','Nirmala UI','Noto Sans Devanagari',serif";
+  const HI_MAATRA_NAME = {
+    "ा": "आ की मात्रा", "ि": "छोटी इ की मात्रा", "ी": "बड़ी ई की मात्रा",
+    "ु": "छोटे उ की मात्रा", "ू": "बड़े ऊ की मात्रा", "े": "ए की मात्रा",
+    "ै": "ऐ की मात्रा", "ो": "ओ की मात्रा", "ौ": "औ की मात्रा",
+    "ं": "अनुस्वार (बिंदी)", "ँ": "चंद्रबिंदु"
+  };
+  function buildWritePrompts(d) {
+    const out = [];
+    const hasMaatra = !!(d.maatra && d.maatra.length);
+    if (hasMaatra) {
+      let list = (d.syllables || []).filter(s => s.s.indexOf(d.maatra) >= 0);
+      if (!list.length) list = (d.syllables || []).slice();
+      list.slice(0, 6).forEach(s => {
+        const base = s.s.split(d.maatra).join("");
+        const nm = HI_MAATRA_NAME[d.maatra] || (d.sound + " की मात्रा");
+        out.push({
+          target: s.s, roman: s.r,
+          hint: base + " + " + d.maatra + " → " + s.s,
+          label: base + " पे " + nm + " लगाओ — " + s.s,
+          speak: base + " के साथ " + d.sound + " की मात्रा लगाओ। " + s.s + " लिखो।"
+        });
+      });
+    } else if (d.letters && d.letters.length) {
+      shuffle(d.letters).slice(0, 7).forEach(ch => out.push({
+        target: ch, roman: "", hint: ch + " लिखो", label: ch + " लिखो",
+        speak: ch + "। " + ch + " लिखो।"
+      }));
+    } else {
+      const short = (d.words || []).filter(w => graphemes(w.w).length <= 4);
+      shuffle(short.length ? short : (d.words || [])).slice(0, 6).forEach(w => out.push({
+        target: w.w, roman: w.r, hint: w.w + "  (" + w.r + ")", label: w.w + " लिखो",
+        speak: w.w + " लिखो।"
+      }));
+    }
+    return out;
+  }
+  function buildWritePad(target) {
+    const S = 300;
+    const wrap = el("div", "write-pad");
+    const canvas = el("canvas", "wp-draw");
+    canvas.width = S; canvas.height = S;
+    wrap.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+    function guide() {
+      ctx.clearRect(0, 0, S, S);
+      ctx.save();
+      ctx.globalAlpha = 0.15; ctx.fillStyle = "#7c4dff";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = WRITE_FONT;
+      ctx.fillText(target, S / 2, S / 2 + 8);
+      ctx.restore();
+    }
+    guide();
+    function maskOf(build) {
+      const c = document.createElement("canvas"); c.width = S; c.height = S;
+      const x = c.getContext("2d");
+      x.textAlign = "center"; x.textBaseline = "middle"; x.font = WRITE_FONT;
+      x.fillStyle = "#000"; x.strokeStyle = "#000"; x.lineJoin = "round";
+      build(x); return x.getImageData(0, 0, S, S).data;
+    }
+    const core = maskOf(x => x.fillText(target, S / 2, S / 2 + 8));
+    const band = maskOf(x => { x.lineWidth = 46; x.strokeText(target, S / 2, S / 2 + 8); x.fillText(target, S / 2, S / 2 + 8); });
+    const fatC = document.createElement("canvas"); fatC.width = S; fatC.height = S;
+    const fx = fatC.getContext("2d"); fx.strokeStyle = "#000"; fx.lineWidth = 40; fx.lineCap = "round"; fx.lineJoin = "round";
+    const inkC = document.createElement("canvas"); inkC.width = S; inkC.height = S;
+    const ix = inkC.getContext("2d"); ix.strokeStyle = "#000"; ix.lineWidth = 16; ix.lineCap = "round"; ix.lineJoin = "round";
+    let down = false, lx = 0, ly = 0;
+    function P(e) { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) * (S / r.width), y: (e.clientY - r.top) * (S / r.height) }; }
+    function seg(x1, y1, x2, y2) {
+      ctx.strokeStyle = "#ff2e88"; ctx.lineWidth = 14; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      fx.beginPath(); fx.moveTo(x1, y1); fx.lineTo(x2, y2); fx.stroke();
+      ix.beginPath(); ix.moveTo(x1, y1); ix.lineTo(x2, y2); ix.stroke();
+    }
+    canvas.style.touchAction = "none";
+    canvas.addEventListener("pointerdown", e => { e.preventDefault(); down = true; const p = P(e); lx = p.x; ly = p.y; seg(lx, ly, lx + 0.01, ly + 0.01); try { canvas.setPointerCapture(e.pointerId); } catch (_) { } });
+    canvas.addEventListener("pointermove", e => { if (!down) return; e.preventDefault(); const p = P(e); seg(lx, ly, p.x, p.y); lx = p.x; ly = p.y; });
+    const up = () => { down = false; };
+    canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up); canvas.addEventListener("pointerleave", up);
+    function clear() { guide(); fx.clearRect(0, 0, S, S); ix.clearRect(0, 0, S, S); }
+    function assess() {
+      const F = fx.getImageData(0, 0, S, S).data, I = ix.getImageData(0, 0, S, S).data;
+      let coreN = 0, cov = 0, inkN = 0, ins = 0;
+      for (let i = 3; i < core.length; i += 4) {
+        if (core[i] > 40) { coreN++; if (F[i] > 40) cov++; }
+        if (I[i] > 40) { inkN++; if (band[i] > 40) ins++; }
+      }
+      const coverage = coreN ? cov / coreN : 0;
+      const inside = inkN ? ins / inkN : 0;
+      const enough = inkN >= coreN * 0.12;
+      return { ok: enough && coverage >= 0.55 && inside >= 0.45, coverage: coverage, inside: inside, ink: inkN, need: coreN };
+    }
+    return { wrap: wrap, clear: clear, assess: assess };
+  }
+
   /* =======================================================================
      HOME  —  the level map
      ===================================================================== */
@@ -172,7 +287,7 @@
     $app.appendChild(top);
 
     // mascot bubble
-    const msg = (serverProgress && serverProgress.message) || ("नमस्ते " + APP.child.hindi + "! आज Day " + unlocked + " खेलो!");
+    const msg = (serverProgress && serverProgress.message) || ("नमस्ते " + APP.child.hindi + "! आज " + fmtDateLong(dateForDay(unlocked)) + " — चलो खेलें!");
     const mithu = el("div", "mithu");
     mithu.innerHTML = '<span class="bird">🦜</span><div class="bubble"><b>मिठू:</b> ' + msg + "</div>";
     mithu.onclick = () => speak(msg);
@@ -192,7 +307,7 @@
 
     // journey heading + big Play button for today
     $app.appendChild(el("div", "h", "🗺️ तुम्हारा सफ़र · Your Journey"));
-    const play = el("button", "btn big next", "▶️ आज का पाठ खेलो · Play Day " + unlocked);
+    const play = el("button", "btn big next", "▶️ आज का पाठ · " + fmtDateLong(dateForDay(unlocked)));
     play.onclick = () => openDay(unlocked);
     $app.appendChild(play);
 
@@ -206,14 +321,14 @@
       const label = d.maatra ? d.soundRoman : ({ celebrate: "Party", review: "Review" }[d.kind] || "Read");
       const node = el("div", "node " + (done ? "done " : "") + (isToday ? "today " : (isUnlocked ? "unlocked " : "locked ")) + d.kind);
       node.innerHTML =
-        '<div class="dnum">' + d.day + "</div>" +
+        '<div class="dnum date">' + fmtDateShort(dateForDay(d.day)) + "</div>" +
         '<div class="dmt">' + glyph + "</div>" +
         '<div class="dlbl">' + label + "</div>" +
         (done ? '<span class="tick">✅</span>' : "") +
         (done && state.stars[d.day] ? '<span class="stars">' + "⭐".repeat(Math.min(3, state.stars[d.day])) + "</span>" : "");
       node.onclick = () => {
         if (isUnlocked) openDay(d.day);
-        else { toast("यह Day " + d.day + " को खुलेगा 🔒", false); speak("यह पाठ बाद में खुलेगा"); }
+        else { toast("यह " + fmtDateShort(dateForDay(d.day)) + " को खुलेगा 🔒", false); speak("यह पाठ बाद में खुलेगा"); }
       };
       map.appendChild(node);
     });
@@ -228,6 +343,7 @@
     const steps = ["meet"];
     if (d.syllables && d.syllables.length) steps.push("syllables");
     if (d.words && d.words.length) steps.push("words");
+    steps.push("write");
     steps.push("game");
     steps.push("reward");
     return steps;
@@ -246,7 +362,7 @@
       const back = el("button", "back", "←");
       back.onclick = renderHome;
       head.appendChild(back);
-      head.appendChild(el("h2", null, d.title + "<small>Day " + d.day + " · " + d.titleEn + "</small>"));
+      head.appendChild(el("h2", null, d.title + "<small>" + fmtDateLong(dateForDay(d.day)) + " · " + d.titleEn + "</small>"));
       $app.appendChild(head);
 
       const dots = el("div", "dots");
@@ -264,6 +380,7 @@
       if (step === "meet") return stepMeet();
       if (step === "syllables") return stepSyllables();
       if (step === "words") return stepWords();
+      if (step === "write") return stepWrite();
       if (step === "game") return stepGame();
       if (step === "reward") return stepReward();
     }
@@ -324,10 +441,55 @@
           card.onclick = (e) => { if (e.target === card || e.target.classList.contains("hw") || e.target.classList.contains("em")) speak(w.w); };
           stage.appendChild(card);
         });
-        const nb = el("button", "btn big next", "🎮 खेल खेलो · Play Game →");
+        const nb = el("button", "btn big next", "✍️ अब लिखो · Write →");
         nb.onclick = next;
         stage.appendChild(nb);
       });
+    }
+
+    /* ---- step: handwriting practice (trace + real assessment) ---- */
+    function stepWrite() {
+      const prompts = buildWritePrompts(d);
+      if (!prompts.length) return next();
+      let p = 0;
+      function round() {
+        const it = prompts[p];
+        shell((stage) => {
+          stage.appendChild(el("div", "game-q",
+            "✍️ उँगली से ट्रेस करो 🖐️ (" + (p + 1) + "/" + prompts.length + ")<br><small>धुँधली लकीरों के ऊपर लिखो</small>"));
+          const instr = el("div", "write-instr");
+          instr.innerHTML = '<div class="wt-target">' + it.target + '</div><div class="wt-say">' + it.label + '</div>' +
+            (it.roman ? '<div class="wt-ro">' + it.roman + '</div>' : '');
+          stage.appendChild(instr);
+          const say = el("button", "btn speak", "🔊 मिठू से सुनो"); say.onclick = () => speak(it.speak);
+          stage.appendChild(say);
+          const pad = buildWritePad(it.target);
+          stage.appendChild(pad.wrap);
+          const row = el("div", "write-actions");
+          const clr = el("button", "btn ghost", "🔄 मिटाओ"); clr.onclick = pad.clear;
+          const chk = el("button", "btn next", "✅ हो गया?");
+          chk.onclick = () => {
+            const r = pad.assess();
+            if (r.ok) {
+              celebrate("शाबाश! ✍️"); speak(praise() + " " + it.target);
+              earned++; addStars(d.day, 1); p++;
+              setTimeout(() => p < prompts.length ? round() : next(), 1000);
+            } else if (r.ink < r.need * 0.12) {
+              toast("थोड़ा और लिखो ✏️", false); speak("लकीरों के ऊपर " + it.target + " लिखो");
+            } else {
+              toast("फिर से कोशिश करो 💪", false); speak("फिर से " + it.target + " लिखो");
+            }
+          };
+          row.appendChild(clr); row.appendChild(chk);
+          stage.appendChild(row);
+          const skip = el("button", "btn warn big", "छोड़ो · आगे →");
+          skip.onclick = () => { p++; p < prompts.length ? round() : next(); };
+          stage.appendChild(el("div", "", "<br>"));
+          stage.appendChild(skip);
+          setTimeout(() => speak(it.speak), 350);
+        });
+      }
+      round();
     }
 
     /* ---- step: game (dispatch) ---- */
@@ -346,7 +508,7 @@
     /* GAME: listen & tap the word you hear */
     function gameListen() {
       const pool = d.words;
-      const rounds = shuffle(pool).slice(0, Math.min(4, pool.length));
+      const rounds = shuffle(pool).slice(0, Math.min(6, pool.length));
       let r = 0;
       function round() {
         const target = rounds[r];
@@ -374,7 +536,7 @@
     /* GAME: match spoken word to the correct emoji */
     function gameMatch() {
       const pool = d.words.filter(w => w.e);
-      const rounds = shuffle(pool).slice(0, Math.min(4, pool.length));
+      const rounds = shuffle(pool).slice(0, Math.min(6, pool.length));
       let r = 0;
       function round() {
         const target = rounds[r];
@@ -403,7 +565,7 @@
 
     /* GAME: build the word from scrambled letter-tiles */
     function gameBuild() {
-      const pool = shuffle(d.words).slice(0, Math.min(3, d.words.length));
+      const pool = shuffle(d.words).slice(0, Math.min(5, d.words.length));
       let r = 0;
       function round() {
         const target = pool[r];
@@ -452,7 +614,7 @@
         return found ? { w, sign: found } : null;
       }).filter(Boolean);
       const pool = withSign.length ? withSign : d.words.map(w => ({ w, sign: SIGNS[0] }));
-      const rounds = shuffle(pool).slice(0, Math.min(4, pool.length));
+      const rounds = shuffle(pool).slice(0, Math.min(6, pool.length));
       let r = 0;
       function round() {
         const target = rounds[r];
@@ -556,7 +718,7 @@
       wrap.innerHTML = '<div class="trophy">' + (d.certificate ? "🎓" : (d.kind === "celebrate" ? "🏆" : "🌟")) + "</div>" +
         "<h2>" + praise() + "</h2>" +
         '<div class="earned">' + "⭐".repeat(Math.min(5, Math.max(1, earned))) + "</div>" +
-        "<p>Day " + d.day + " पूरा हुआ, " + APP.child.hindi + "!</p>" +
+        "<p>" + fmtDateLong(dateForDay(d.day)) + " पूरा हुआ, " + APP.child.hindi + "!</p>" +
         (d.badge ? '<div class="badge">' + d.badge + "</div>" : "");
       $app.appendChild(wrap);
 
@@ -598,6 +760,7 @@
     box.innerHTML = "<h2 style='color:var(--purple);margin-top:0'>👪 Parent Guide</h2>" +
       "<p><b>Sound on:</b> tap 🔊 anywhere to hear clear Hindi. Ask Myra to repeat.</p>" +
       "<p><b>🎤 Say it:</b> lets her speak the word — always encouraging" + (canListen ? "." : " (not supported on this browser).") + "</p>" +
+      "<p><b>✍️ Trace &amp; write:</b> Myra hears “letter + maatra”, traces the faint guide with her finger, and taps ✅ — the app checks it gently and cheers her on. Great for building handwriting.</p>" +
       "<p><b>One lesson a day:</b> a new day unlocks every morning for 31 days — from vowels to reading full words.</p>" +
       "<p><b>Add to Home Screen</b> for an app feel (Share → Add to Home Screen).</p>";
     const c = el("button", "btn big next", "ठीक है ✓"); c.onclick = () => ov.remove();

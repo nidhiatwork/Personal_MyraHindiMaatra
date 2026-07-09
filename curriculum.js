@@ -41,7 +41,16 @@ const CURRICULUM = [
       {w:"बस", r:"bas", m:"bus", e:"🚌"},
       {w:"जल", r:"jal", m:"water", e:"💧"},
       {w:"पर", r:"par", m:"feather", e:"🪶"},
-      {w:"मन", r:"man", m:"heart", e:"❤️"}
+      {w:"मन", r:"man", m:"heart", e:"❤️"},
+      {w:"कलम", r:"kalam", m:"pen", e:"🖊️"},
+      {w:"कमल", r:"kamal", m:"lotus", e:"🪷"},
+      {w:"नमक", r:"namak", m:"salt", e:"🧂"},
+      {w:"वन", r:"van", m:"forest", e:"🌳"},
+      {w:"मगर", r:"magar", m:"crocodile", e:"🐊"},
+      {w:"बतख", r:"batakh", m:"duck", e:"🦆"},
+      {w:"कप", r:"kap", m:"cup", e:"☕"},
+      {w:"रथ", r:"rath", m:"chariot", e:"🛕"},
+      {w:"सड़क", r:"sadak", m:"road", e:"🛣️"}
     ],
     game: "listen"
   },
@@ -63,7 +72,16 @@ const CURRICULUM = [
       {w:"हाथ", r:"haath", m:"hand", e:"✋"},
       {w:"बाल", r:"baal", m:"hair", e:"💇"},
       {w:"माला", r:"maalaa", m:"garland", e:"📿"},
-      {w:"राजा", r:"raajaa", m:"king", e:"🤴"}
+      {w:"राजा", r:"raajaa", m:"king", e:"🤴"},
+      {w:"काम", r:"kaam", m:"work", e:"💼"},
+      {w:"नाम", r:"naam", m:"name", e:"📛"},
+      {w:"आग", r:"aag", m:"fire", e:"🔥"},
+      {w:"कान", r:"kaan", m:"ear", e:"👂"},
+      {w:"नाक", r:"naak", m:"nose", e:"👃"},
+      {w:"आठ", r:"aath", m:"eight", e:"8️⃣"},
+      {w:"गाय", r:"gaay", m:"cow", e:"🐄"},
+      {w:"दाल", r:"daal", m:"lentils", e:"🍲"},
+      {w:"बादल", r:"baadal", m:"cloud", e:"☁️"}
     ],
     game: "match"
   },
@@ -85,7 +103,14 @@ const CURRICULUM = [
       {w:"आम", r:"aam", m:"mango", e:"🥭"},
       {w:"नाना", r:"naanaa", m:"grandpa", e:"👴"},
       {w:"बादल", r:"baadal", m:"cloud", e:"☁️"},
-      {w:"कपड़ा", r:"kapdaa", m:"cloth", e:"🧺"}
+      {w:"कपड़ा", r:"kapdaa", m:"cloth", e:"🧺"},
+      {w:"घर", r:"ghar", m:"home", e:"🏠"},
+      {w:"काम", r:"kaam", m:"work", e:"💼"},
+      {w:"आग", r:"aag", m:"fire", e:"🔥"},
+      {w:"हाथ", r:"haath", m:"hand", e:"✋"},
+      {w:"जल", r:"jal", m:"water", e:"💧"},
+      {w:"गाय", r:"gaay", m:"cow", e:"🐄"},
+      {w:"नाव", r:"naav", m:"boat", e:"⛵"}
     ],
     game: "listen"
   },
@@ -107,7 +132,16 @@ const CURRICULUM = [
       {w:"तिल", r:"til", m:"sesame", e:"⚫"},
       {w:"गिन", r:"gin", m:"count", e:"🔢"},
       {w:"मिल", r:"mil", m:"meet", e:"🤝"},
-      {w:"किताब", r:"kitaab", m:"book", e:"📖"}
+      {w:"किताब", r:"kitaab", m:"book", e:"📖"},
+      {w:"चिड़िया", r:"chidiyaa", m:"bird", e:"🐦"},
+      {w:"खिड़की", r:"khidkee", m:"window", e:"🪟"},
+      {w:"दिया", r:"diyaa", m:"lamp", e:"🪔"},
+      {w:"पिन", r:"pin", m:"pin", e:"📌"},
+      {w:"टिकट", r:"tikat", m:"ticket", e:"🎫"},
+      {w:"किला", r:"kilaa", m:"fort", e:"🏰"},
+      {w:"सिर", r:"sir", m:"head", e:"🧑"},
+      {w:"हिरन", r:"hiran", m:"deer", e:"🦌"},
+      {w:"दिशा", r:"dishaa", m:"direction", e:"🧭"}
     ],
     game: "build"
   },
@@ -129,7 +163,16 @@ const CURRICULUM = [
       {w:"पानी", r:"paanee", m:"water", e:"💧"},
       {w:"नदी", r:"nadee", m:"river", e:"🏞️"},
       {w:"चाबी", r:"chaabee", m:"key", e:"🔑"},
-      {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"}
+      {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"},
+      {w:"बकरी", r:"bakree", m:"goat", e:"🐐"},
+      {w:"मछली", r:"machhlee", m:"fish", e:"🐟"},
+      {w:"साड़ी", r:"saadee", m:"saree", e:"🥻"},
+      {w:"दाढ़ी", r:"daadhee", m:"beard", e:"🧔"},
+      {w:"टीवी", r:"teevee", m:"TV", e:"📺"},
+      {w:"घी", r:"ghee", m:"ghee", e:"🧈"},
+      {w:"खीर", r:"kheer", m:"rice pudding", e:"🍮"},
+      {w:"चीता", r:"cheetaa", m:"cheetah", e:"🐆"},
+      {w:"लकड़ी", r:"lakadee", m:"wood", e:"🪵"}
     ],
     game: "match"
   },
@@ -151,7 +194,15 @@ const CURRICULUM = [
       {w:"तिल", r:"til", m:"sesame", e:"⚫"},
       {w:"तीर", r:"teer", m:"arrow", e:"🏹"},
       {w:"किला", r:"kilaa", m:"fort", e:"🏰"},
-      {w:"नीला", r:"neelaa", m:"blue", e:"🔵"}
+      {w:"नीला", r:"neelaa", m:"blue", e:"🔵"},
+      {w:"पानी", r:"paanee", m:"water", e:"💧"},
+      {w:"नदी", r:"nadee", m:"river", e:"🏞️"},
+      {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"},
+      {w:"दिल", r:"dil", m:"heart", e:"❤️"},
+      {w:"चाबी", r:"chaabee", m:"key", e:"🔑"},
+      {w:"मछली", r:"machhlee", m:"fish", e:"🐟"},
+      {w:"टीवी", r:"teevee", m:"TV", e:"📺"},
+      {w:"बकरी", r:"bakree", m:"goat", e:"🐐"}
     ],
     game: "whichMaatra"
   },
@@ -173,7 +224,14 @@ const CURRICULUM = [
       {w:"किताब", r:"kitaab", m:"book", e:"📖"},
       {w:"पानी", r:"paanee", m:"water", e:"💧"},
       {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"},
-      {w:"बादल", r:"baadal", m:"cloud", e:"☁️"}
+      {w:"बादल", r:"baadal", m:"cloud", e:"☁️"},
+      {w:"घर", r:"ghar", m:"home", e:"🏠"},
+      {w:"दिन", r:"din", m:"day", e:"🌞"},
+      {w:"नदी", r:"nadee", m:"river", e:"🏞️"},
+      {w:"मछली", r:"machhlee", m:"fish", e:"🐟"},
+      {w:"गाय", r:"gaay", m:"cow", e:"🐄"},
+      {w:"चाबी", r:"chaabee", m:"key", e:"🔑"},
+      {w:"माला", r:"maalaa", m:"garland", e:"📿"}
     ],
     game: "read", badge: "⭐ हफ़्ता 1"
   },
@@ -197,7 +255,16 @@ const CURRICULUM = [
       {w:"सुन", r:"sun", m:"listen", e:"👂"},
       {w:"धुन", r:"dhun", m:"tune", e:"🎵"},
       {w:"बुरा", r:"buraa", m:"bad", e:"👎"},
-      {w:"मुकुट", r:"mukut", m:"crown", e:"👑"}
+      {w:"मुकुट", r:"mukut", m:"crown", e:"👑"},
+      {w:"गुड़िया", r:"gudiyaa", m:"doll", e:"🪆"},
+      {w:"गुलाब", r:"gulaab", m:"rose", e:"🌹"},
+      {w:"सुई", r:"suee", m:"needle", e:"🪡"},
+      {w:"पुल", r:"pul", m:"bridge", e:"🌉"},
+      {w:"मधु", r:"madhu", m:"honey", e:"🍯"},
+      {w:"गुफा", r:"gufaa", m:"cave", e:"🕳️"},
+      {w:"सुबह", r:"subah", m:"morning", e:"🌅"},
+      {w:"बुलबुल", r:"bulbul", m:"nightingale", e:"🐦"},
+      {w:"कुरता", r:"kurtaa", m:"kurta", e:"👕"}
     ],
     game: "build"
   },
@@ -219,7 +286,16 @@ const CURRICULUM = [
       {w:"आलू", r:"aaloo", m:"potato", e:"🥔"},
       {w:"भालू", r:"bhaaloo", m:"bear", e:"🐻"},
       {w:"चूहा", r:"choohaa", m:"mouse", e:"🐭"},
-      {w:"जूता", r:"jootaa", m:"shoe", e:"👟"}
+      {w:"जूता", r:"jootaa", m:"shoe", e:"👟"},
+      {w:"चूड़ी", r:"choodee", m:"bangle", e:"💍"},
+      {w:"झाड़ू", r:"jhaadoo", m:"broom", e:"🧹"},
+      {w:"काजू", r:"kaajoo", m:"cashew", e:"🥜"},
+      {w:"मूली", r:"moolee", m:"radish", e:"🥬"},
+      {w:"सूरज", r:"sooraj", m:"sun", e:"🌞"},
+      {w:"कबूतर", r:"kabootar", m:"pigeon", e:"🕊️"},
+      {w:"भूत", r:"bhoot", m:"ghost", e:"👻"},
+      {w:"दूध", r:"doodh", m:"milk", e:"🥛"},
+      {w:"चाकू", r:"chaakoo", m:"knife", e:"🔪"}
     ],
     game: "match"
   },
@@ -241,7 +317,15 @@ const CURRICULUM = [
       {w:"सुबह", r:"subah", m:"morning", e:"🌅"},
       {w:"आलू", r:"aaloo", m:"potato", e:"🥔"},
       {w:"चूहा", r:"choohaa", m:"mouse", e:"🐭"},
-      {w:"तुम", r:"tum", m:"you", e:"🫵"}
+      {w:"तुम", r:"tum", m:"you", e:"🫵"},
+      {w:"गुलाब", r:"gulaab", m:"rose", e:"🌹"},
+      {w:"सूरज", r:"sooraj", m:"sun", e:"🌞"},
+      {w:"भालू", r:"bhaaloo", m:"bear", e:"🐻"},
+      {w:"मुकुट", r:"mukut", m:"crown", e:"👑"},
+      {w:"दूध", r:"doodh", m:"milk", e:"🥛"},
+      {w:"झूला", r:"jhoolaa", m:"swing", e:"🛝"},
+      {w:"सुई", r:"suee", m:"needle", e:"🪡"},
+      {w:"काजू", r:"kaajoo", m:"cashew", e:"🥜"}
     ],
     game: "whichMaatra"
   },
@@ -263,7 +347,16 @@ const CURRICULUM = [
       {w:"तेल", r:"tel", m:"oil", e:"🛢️"},
       {w:"रेल", r:"rel", m:"train", e:"🚂"},
       {w:"मेला", r:"melaa", m:"fair", e:"🎡"},
-      {w:"बेर", r:"ber", m:"berry", e:"🫐"}
+      {w:"बेर", r:"ber", m:"berry", e:"🫐"},
+      {w:"केला", r:"kelaa", m:"banana", e:"🍌"},
+      {w:"बेटा", r:"betaa", m:"son", e:"👦"},
+      {w:"शेर", r:"sher", m:"lion", e:"🦁"},
+      {w:"जेब", r:"jeb", m:"pocket", e:"👖"},
+      {w:"केक", r:"kek", m:"cake", e:"🍰"},
+      {w:"खेल", r:"khel", m:"game", e:"⚽"},
+      {w:"मेज़", r:"mez", m:"table", e:"🪑"},
+      {w:"सवेरा", r:"saveraa", m:"morning", e:"🌅"},
+      {w:"सेना", r:"senaa", m:"army", e:"🪖"}
     ],
     game: "build"
   },
@@ -285,7 +378,16 @@ const CURRICULUM = [
       {w:"थैला", r:"thailaa", m:"bag", e:"🛍️"},
       {w:"पैसा", r:"paisaa", m:"money", e:"🪙"},
       {w:"मैना", r:"mainaa", m:"myna bird", e:"🐦"},
-      {w:"गैस", r:"gais", m:"gas", e:"🔥"}
+      {w:"गैस", r:"gais", m:"gas", e:"🔥"},
+      {w:"पैर", r:"pair", m:"foot", e:"🦶"},
+      {w:"हैट", r:"hait", m:"hat", e:"🎩"},
+      {w:"नैना", r:"nainaa", m:"eyes", e:"👀"},
+      {w:"सैर", r:"sair", m:"stroll", e:"🚶"},
+      {w:"तैर", r:"tair", m:"swim", e:"🏊"},
+      {w:"मैदान", r:"maidaan", m:"field", e:"🏞️"},
+      {w:"थैली", r:"thailee", m:"pouch", e:"👛"},
+      {w:"बैठ", r:"baith", m:"sit", e:"🪑"},
+      {w:"कैसा", r:"kaisaa", m:"how", e:"❓"}
     ],
     game: "match"
   },
@@ -307,7 +409,15 @@ const CURRICULUM = [
       {w:"पेड़", r:"ped", m:"tree", e:"🌳"},
       {w:"पैसा", r:"paisaa", m:"money", e:"🪙"},
       {w:"रेल", r:"rel", m:"train", e:"🚂"},
-      {w:"बैल", r:"bail", m:"ox", e:"🐂"}
+      {w:"बैल", r:"bail", m:"ox", e:"🐂"},
+      {w:"केला", r:"kelaa", m:"banana", e:"🍌"},
+      {w:"थैला", r:"thailaa", m:"bag", e:"🛍️"},
+      {w:"शेर", r:"sher", m:"lion", e:"🦁"},
+      {w:"पैर", r:"pair", m:"foot", e:"🦶"},
+      {w:"खेल", r:"khel", m:"game", e:"⚽"},
+      {w:"मैना", r:"mainaa", m:"myna", e:"🐦"},
+      {w:"केक", r:"kek", m:"cake", e:"🍰"},
+      {w:"सैर", r:"sair", m:"stroll", e:"🚶"}
     ],
     game: "whichMaatra"
   },
@@ -329,7 +439,15 @@ const CURRICULUM = [
       {w:"झूला", r:"jhoolaa", m:"swing", e:"🛝"},
       {w:"पैसा", r:"paisaa", m:"money", e:"🪙"},
       {w:"भालू", r:"bhaaloo", m:"bear", e:"🐻"},
-      {w:"पेड़", r:"ped", m:"tree", e:"🌳"}
+      {w:"पेड़", r:"ped", m:"tree", e:"🌳"},
+      {w:"केला", r:"kelaa", m:"banana", e:"🍌"},
+      {w:"सूरज", r:"sooraj", m:"sun", e:"🌞"},
+      {w:"गुलाब", r:"gulaab", m:"rose", e:"🌹"},
+      {w:"शेर", r:"sher", m:"lion", e:"🦁"},
+      {w:"बैल", r:"bail", m:"ox", e:"🐂"},
+      {w:"दूध", r:"doodh", m:"milk", e:"🥛"},
+      {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"},
+      {w:"मछली", r:"machhlee", m:"fish", e:"🐟"}
     ],
     game: "read", badge: "⭐ हफ़्ता 2"
   },
@@ -353,7 +471,16 @@ const CURRICULUM = [
       {w:"गोल", r:"gol", m:"round", e:"⚪"},
       {w:"रोटी", r:"rotee", m:"bread", e:"🫓"},
       {w:"टोपी", r:"topee", m:"cap", e:"🧢"},
-      {w:"सोना", r:"sonaa", m:"gold", e:"🥇"}
+      {w:"सोना", r:"sonaa", m:"gold", e:"🥇"},
+      {w:"घोड़ा", r:"ghodaa", m:"horse", e:"🐴"},
+      {w:"कोयल", r:"koyal", m:"cuckoo", e:"🐦"},
+      {w:"गोभी", r:"gobhee", m:"cauliflower", e:"🥦"},
+      {w:"कोट", r:"kot", m:"coat", e:"🧥"},
+      {w:"सोफ़ा", r:"sofaa", m:"sofa", e:"🛋️"},
+      {w:"लोमड़ी", r:"lomdee", m:"fox", e:"🦊"},
+      {w:"भोजन", r:"bhojan", m:"meal", e:"🍛"},
+      {w:"ढोल", r:"dhol", m:"drum", e:"🥁"},
+      {w:"चोटी", r:"chotee", m:"braid", e:"💇"}
     ],
     game: "build"
   },
@@ -375,7 +502,16 @@ const CURRICULUM = [
       {w:"चौक", r:"chauk", m:"square", e:"🔲"},
       {w:"मौसम", r:"mausam", m:"weather", e:"🌦️"},
       {w:"दौड़", r:"daud", m:"run/race", e:"🏃"},
-      {w:"पौधा", r:"paudhaa", m:"plant", e:"🌱"}
+      {w:"पौधा", r:"paudhaa", m:"plant", e:"🌱"},
+      {w:"लौकी", r:"laukee", m:"gourd", e:"🥒"},
+      {w:"सौ", r:"sau", m:"hundred", e:"💯"},
+      {w:"हथौड़ा", r:"hathaudaa", m:"hammer", e:"🔨"},
+      {w:"तौलिया", r:"tauliyaa", m:"towel", e:"🧻"},
+      {w:"कौड़ी", r:"kaudee", m:"shell", e:"🐚"},
+      {w:"नौका", r:"naukaa", m:"boat", e:"⛵"},
+      {w:"फौज", r:"fauj", m:"army", e:"🪖"},
+      {w:"खिलौना", r:"khilaunaa", m:"toy", e:"🧸"},
+      {w:"चौराहा", r:"chauraahaa", m:"crossroad", e:"🚦"}
     ],
     game: "match"
   },
@@ -397,7 +533,15 @@ const CURRICULUM = [
       {w:"रोटी", r:"rotee", m:"bread", e:"🫓"},
       {w:"मौसम", r:"mausam", m:"weather", e:"🌦️"},
       {w:"टोपी", r:"topee", m:"cap", e:"🧢"},
-      {w:"पौधा", r:"paudhaa", m:"plant", e:"🌱"}
+      {w:"पौधा", r:"paudhaa", m:"plant", e:"🌱"},
+      {w:"घोड़ा", r:"ghodaa", m:"horse", e:"🐴"},
+      {w:"नौ", r:"nau", m:"nine", e:"9️⃣"},
+      {w:"गोभी", r:"gobhee", m:"cauliflower", e:"🥦"},
+      {w:"लौकी", r:"laukee", m:"gourd", e:"🥒"},
+      {w:"ढोल", r:"dhol", m:"drum", e:"🥁"},
+      {w:"दौड़", r:"daud", m:"race", e:"🏃"},
+      {w:"कोट", r:"kot", m:"coat", e:"🧥"},
+      {w:"खिलौना", r:"khilaunaa", m:"toy", e:"🧸"}
     ],
     game: "whichMaatra"
   },
@@ -419,7 +563,16 @@ const CURRICULUM = [
       {w:"बंदर", r:"bandar", m:"monkey", e:"🐒"},
       {w:"गंगा", r:"gangaa", m:"Ganga river", e:"🏞️"},
       {w:"ठंड", r:"thand", m:"cold", e:"🥶"},
-      {w:"कंघी", r:"kanghee", m:"comb", e:"💇"}
+      {w:"कंघी", r:"kanghee", m:"comb", e:"💇"},
+      {w:"पतंग", r:"patang", m:"kite", e:"🪁"},
+      {w:"मंदिर", r:"mandir", m:"temple", e:"🛕"},
+      {w:"झंडा", r:"jhandaa", m:"flag", e:"🚩"},
+      {w:"घंटी", r:"ghantee", m:"bell", e:"🔔"},
+      {w:"संतरा", r:"santaraa", m:"orange", e:"🍊"},
+      {w:"चंदा", r:"chandaa", m:"moon", e:"🌙"},
+      {w:"कंबल", r:"kambal", m:"blanket", e:"🛏️"},
+      {w:"गेंद", r:"gend", m:"ball", e:"⚽"},
+      {w:"जंगल", r:"jangal", m:"forest", e:"🌴"}
     ],
     game: "build"
   },
@@ -441,7 +594,16 @@ const CURRICULUM = [
       {w:"दाँत", r:"daant", m:"tooth", e:"🦷"},
       {w:"माँ", r:"maa", m:"mother", e:"👩"},
       {w:"पाँच", r:"paanch", m:"five", e:"5️⃣"},
-      {w:"साँप", r:"saanp", m:"snake", e:"🐍"}
+      {w:"साँप", r:"saanp", m:"snake", e:"🐍"},
+      {w:"आँगन", r:"aangan", m:"courtyard", e:"🏡"},
+      {w:"गाँव", r:"gaanv", m:"village", e:"🏘️"},
+      {w:"धुआँ", r:"dhuaan", m:"smoke", e:"💨"},
+      {w:"बाँसुरी", r:"baansuree", m:"flute", e:"🪈"},
+      {w:"चाँदी", r:"chaandee", m:"silver", e:"🥈"},
+      {w:"टाँग", r:"taang", m:"leg", e:"🦵"},
+      {w:"बाँह", r:"baanh", m:"arm", e:"💪"},
+      {w:"हँसी", r:"hansee", m:"laughter", e:"😄"},
+      {w:"पाँव", r:"paanv", m:"foot", e:"🦶"}
     ],
     game: "match"
   },
@@ -463,7 +625,17 @@ const CURRICULUM = [
       {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"},
       {w:"फूल", r:"phool", m:"flower", e:"🌸"},
       {w:"मोर", r:"mor", m:"peacock", e:"🦚"},
-      {w:"रंग", r:"rang", m:"colour", e:"🌈"}
+      {w:"रंग", r:"rang", m:"colour", e:"🌈"},
+      {w:"गुलाब", r:"gulaab", m:"rose", e:"🌹"},
+      {w:"सेब", r:"seb", m:"apple", e:"🍎"},
+      {w:"नौ", r:"nau", m:"nine", e:"9️⃣"},
+      {w:"चाँद", r:"chaand", m:"moon", e:"🌙"},
+      {w:"पतंग", r:"patang", m:"kite", e:"🪁"},
+      {w:"केला", r:"kelaa", m:"banana", e:"🍌"},
+      {w:"दूध", r:"doodh", m:"milk", e:"🥛"},
+      {w:"घोड़ा", r:"ghodaa", m:"horse", e:"🐴"},
+      {w:"मछली", r:"machhlee", m:"fish", e:"🐟"},
+      {w:"टोपी", r:"topee", m:"cap", e:"🧢"}
     ],
     game: "whichMaatra"
   },
@@ -482,7 +654,15 @@ const CURRICULUM = [
       {w:"मोर", r:"mor", m:"peacock", e:"🦚"},
       {w:"कौआ", r:"kauaa", m:"crow", e:"🐦‍⬛"},
       {w:"चाँद", r:"chaand", m:"moon", e:"🌙"},
-      {w:"रंग", r:"rang", m:"colour", e:"🌈"}
+      {w:"रंग", r:"rang", m:"colour", e:"🌈"},
+      {w:"फूल", r:"phool", m:"flower", e:"🌸"},
+      {w:"गुलाब", r:"gulaab", m:"rose", e:"🌹"},
+      {w:"पतंग", r:"patang", m:"kite", e:"🪁"},
+      {w:"सेब", r:"seb", m:"apple", e:"🍎"},
+      {w:"हाथी", r:"haathee", m:"elephant", e:"🐘"},
+      {w:"केला", r:"kelaa", m:"banana", e:"🍌"},
+      {w:"मंदिर", r:"mandir", m:"temple", e:"🛕"},
+      {w:"घोड़ा", r:"ghodaa", m:"horse", e:"🐴"}
     ],
     poem: [
       {s:"चंदा मामा दूर के,", r:"chandaa maamaa door ke", m:"Moon uncle far away,"},
@@ -509,7 +689,16 @@ const CURRICULUM = [
       {w:"मकान", r:"makaan", m:"house", e:"🏘️"},
       {w:"बादल", r:"baadal", m:"cloud", e:"☁️"},
       {w:"सलाद", r:"salaad", m:"salad", e:"🥗"},
-      {w:"दावत", r:"daavat", m:"feast", e:"🍽️"}
+      {w:"दावत", r:"daavat", m:"feast", e:"🍽️"},
+      {w:"किताब", r:"kitaab", m:"book", e:"📖"},
+      {w:"समोसा", r:"samosaa", m:"samosa", e:"🥟"},
+      {w:"तराजू", r:"taraajoo", m:"scale", e:"⚖️"},
+      {w:"सितारा", r:"sitaaraa", m:"star", e:"⭐"},
+      {w:"कबूतर", r:"kabootar", m:"pigeon", e:"🕊️"},
+      {w:"दरवाज़ा", r:"darvaazaa", m:"door", e:"🚪"},
+      {w:"खिलौना", r:"khilaunaa", m:"toy", e:"🧸"},
+      {w:"अखबार", r:"akhbaar", m:"newspaper", e:"📰"},
+      {w:"किनारा", r:"kinaaraa", m:"shore", e:"🏖️"}
     ],
     game: "build"
   },
@@ -530,7 +719,16 @@ const CURRICULUM = [
       {w:"समोसा", r:"samosaa", m:"samosa", e:"🥟"},
       {w:"बादाम", r:"baadaam", m:"almond", e:"🌰"},
       {w:"पतंग", r:"patang", m:"kite", e:"🪁"},
-      {w:"कमल", r:"kamal", m:"lotus", e:"🪷"}
+      {w:"कमल", r:"kamal", m:"lotus", e:"🪷"},
+      {w:"मछली", r:"machhlee", m:"fish", e:"🐟"},
+      {w:"कबूतर", r:"kabootar", m:"pigeon", e:"🕊️"},
+      {w:"बकरी", r:"bakree", m:"goat", e:"🐐"},
+      {w:"तराजू", r:"taraajoo", m:"scale", e:"⚖️"},
+      {w:"हिरन", r:"hiran", m:"deer", e:"🦌"},
+      {w:"सितारा", r:"sitaaraa", m:"star", e:"⭐"},
+      {w:"चिड़िया", r:"chidiyaa", m:"bird", e:"🐦"},
+      {w:"मंदिर", r:"mandir", m:"temple", e:"🛕"},
+      {w:"कछुआ", r:"kachhuaa", m:"turtle", e:"🐢"}
     ],
     game: "match"
   },
@@ -549,13 +747,22 @@ const CURRICULUM = [
       {w:"यह", r:"yeh", m:"this", e:"👇"},
       {w:"वह", r:"vah", m:"that", e:"👉"},
       {w:"मेरा", r:"meraa", m:"my", e:"🙋"},
-      {w:"है", r:"hai", m:"is", e:"✅"}
+      {w:"है", r:"hai", m:"is", e:"✅"},
+      {w:"तेरा", r:"teraa", m:"your", e:"🫵"},
+      {w:"नाम", r:"naam", m:"name", e:"📛"},
+      {w:"अच्छा", r:"achchhaa", m:"good", e:"👍"},
+      {w:"बड़ा", r:"badaa", m:"big", e:"🔼"},
+      {w:"छोटा", r:"chhotaa", m:"small", e:"🔽"}
     ],
     sentences: [
       {s:"यह आम है।", r:"yeh aam hai", m:"This is a mango."},
       {s:"वह घर है।", r:"vah ghar hai", m:"That is a house."},
       {s:"मेरा नाम मायरा है।", r:"meraa naam Myra hai", m:"My name is Myra."},
-      {s:"मुझे केला पसंद है।", r:"mujhe kelaa pasand hai", m:"I like banana."}
+      {s:"मुझे केला पसंद है।", r:"mujhe kelaa pasand hai", m:"I like banana."},
+      {s:"यह मेरा घर है।", r:"yeh meraa ghar hai", m:"This is my house."},
+      {s:"वह मोर है।", r:"vah mor hai", m:"That is a peacock."},
+      {s:"गाय दूध देती है।", r:"gaay doodh detee hai", m:"The cow gives milk."},
+      {s:"फूल लाल है।", r:"phool laal hai", m:"The flower is red."}
     ],
     game: "sentence"
   },
@@ -576,7 +783,16 @@ const CURRICULUM = [
       {w:"वह", r:"vah", m:"that", e:"👉"},
       {w:"मैं", r:"main", m:"I", e:"🙋"},
       {w:"तुम", r:"tum", m:"you", e:"🫵"},
-      {w:"हम", r:"ham", m:"we", e:"👨‍👩‍👧"}
+      {w:"हम", r:"ham", m:"we", e:"👨‍👩‍👧"},
+      {w:"है", r:"hai", m:"is", e:"✅"},
+      {w:"में", r:"mein", m:"in", e:"📥"},
+      {w:"को", r:"ko", m:"to", e:"➡️"},
+      {w:"से", r:"se", m:"from", e:"↖️"},
+      {w:"नहीं", r:"naheen", m:"no", e:"🚫"},
+      {w:"हाँ", r:"haan", m:"yes", e:"✔️"},
+      {w:"क्या", r:"kyaa", m:"what", e:"❓"},
+      {w:"मेरा", r:"meraa", m:"mine", e:"🙋"},
+      {w:"अच्छा", r:"achchhaa", m:"good", e:"👍"}
     ],
     game: "read"
   },
@@ -597,7 +813,16 @@ const CURRICULUM = [
       {w:"चूहा", r:"choohaa", m:"mouse", e:"🐭"},
       {w:"मोर", r:"mor", m:"peacock", e:"🦚"},
       {w:"भालू", r:"bhaaloo", m:"bear", e:"🐻"},
-      {w:"साँप", r:"saanp", m:"snake", e:"🐍"}
+      {w:"साँप", r:"saanp", m:"snake", e:"🐍"},
+      {w:"शेर", r:"sher", m:"lion", e:"🦁"},
+      {w:"बकरी", r:"bakree", m:"goat", e:"🐐"},
+      {w:"घोड़ा", r:"ghodaa", m:"horse", e:"🐴"},
+      {w:"कबूतर", r:"kabootar", m:"pigeon", e:"🕊️"},
+      {w:"गाय", r:"gaay", m:"cow", e:"🐄"},
+      {w:"लोमड़ी", r:"lomdee", m:"fox", e:"🦊"},
+      {w:"हिरन", r:"hiran", m:"deer", e:"🦌"},
+      {w:"कछुआ", r:"kachhuaa", m:"turtle", e:"🐢"},
+      {w:"ऊँट", r:"oont", m:"camel", e:"🐫"}
     ],
     game: "match"
   },
@@ -618,7 +843,16 @@ const CURRICULUM = [
       {w:"पक्का", r:"pakkaa", m:"firm/ripe", e:"💪"},
       {w:"चक्की", r:"chakkee", m:"grinder", e:"⚙️"},
       {w:"मक्खन", r:"makkhan", m:"butter", e:"🧈"},
-      {w:"गुड्डा", r:"guddaa", m:"doll (boy)", e:"🪆"}
+      {w:"गुड्डा", r:"guddaa", m:"doll (boy)", e:"🪆"},
+      {w:"बिल्ली", r:"billee", m:"cat", e:"🐱"},
+      {w:"कुत्ता", r:"kuttaa", m:"dog", e:"🐕"},
+      {w:"पत्ता", r:"pattaa", m:"leaf", e:"🍃"},
+      {w:"बत्तख", r:"battakh", m:"duck", e:"🦆"},
+      {w:"रस्सी", r:"rassee", m:"rope", e:"🪢"},
+      {w:"डिब्बा", r:"dibbaa", m:"box", e:"📦"},
+      {w:"लड्डू", r:"laddoo", m:"laddu", e:"🍬"},
+      {w:"चप्पल", r:"chappal", m:"slipper", e:"🩴"},
+      {w:"उल्लू", r:"ulloo", m:"owl", e:"🦉"}
     ],
     game: "build"
   },
@@ -639,7 +873,16 @@ const CURRICULUM = [
       {w:"चावल", r:"chaaval", m:"rice", e:"🍚"},
       {w:"दूध", r:"doodh", m:"milk", e:"🥛"},
       {w:"सेब", r:"seb", m:"apple", e:"🍎"},
-      {w:"आम", r:"aam", m:"mango", e:"🥭"}
+      {w:"आम", r:"aam", m:"mango", e:"🥭"},
+      {w:"केला", r:"kelaa", m:"banana", e:"🍌"},
+      {w:"समोसा", r:"samosaa", m:"samosa", e:"🥟"},
+      {w:"लड्डू", r:"laddoo", m:"laddu", e:"🍬"},
+      {w:"आलू", r:"aaloo", m:"potato", e:"🥔"},
+      {w:"खीर", r:"kheer", m:"kheer", e:"🍮"},
+      {w:"संतरा", r:"santaraa", m:"orange", e:"🍊"},
+      {w:"अंगूर", r:"angoor", m:"grapes", e:"🍇"},
+      {w:"जलेबी", r:"jalebee", m:"jalebi", e:"🍥"},
+      {w:"पनीर", r:"paneer", m:"cheese", e:"🧀"}
     ],
     game: "match"
   },
@@ -660,7 +903,16 @@ const CURRICULUM = [
       {w:"पीला", r:"peelaa", m:"yellow", e:"🟡"},
       {w:"तीन", r:"teen", m:"three", e:"3️⃣"},
       {w:"माँ", r:"maa", m:"mother", e:"👩"},
-      {w:"नानी", r:"naanee", m:"grandma", e:"👵"}
+      {w:"नानी", r:"naanee", m:"grandma", e:"👵"},
+      {w:"हरा", r:"haraa", m:"green", e:"🟢"},
+      {w:"काला", r:"kaalaa", m:"black", e:"⚫"},
+      {w:"सफेद", r:"safed", m:"white", e:"⚪"},
+      {w:"एक", r:"ek", m:"one", e:"1️⃣"},
+      {w:"दो", r:"do", m:"two", e:"✌️"},
+      {w:"पाँच", r:"paanch", m:"five", e:"5️⃣"},
+      {w:"पापा", r:"paapaa", m:"papa", e:"👨"},
+      {w:"दादा", r:"daadaa", m:"grandpa", e:"👴"},
+      {w:"भाई", r:"bhaaee", m:"brother", e:"👦"}
     ],
     game: "read"
   },
@@ -679,7 +931,13 @@ const CURRICULUM = [
       {w:"मछली", r:"machhlee", m:"fish", e:"🐟"},
       {w:"जल", r:"jal", m:"water", e:"💧"},
       {w:"रानी", r:"raanee", m:"queen", e:"👸"},
-      {w:"पानी", r:"paanee", m:"water", e:"🌊"}
+      {w:"पानी", r:"paanee", m:"water", e:"🌊"},
+      {w:"जीवन", r:"jeevan", m:"life", e:"🌱"},
+      {w:"हाथ", r:"haath", m:"hand", e:"✋"},
+      {w:"डर", r:"dar", m:"fear", e:"😨"},
+      {w:"बाहर", r:"baahar", m:"outside", e:"🚪"},
+      {w:"दूर", r:"door", m:"far", e:"↔️"},
+      {w:"घर", r:"ghar", m:"home", e:"🏠"}
     ],
     poem: [
       {s:"मछली जल की रानी है,", r:"machhlee jal kee raanee hai", m:"The fish is the queen of water,"},
@@ -706,7 +964,13 @@ const CURRICULUM = [
       {w:"एक्सपर्ट", r:"expert", m:"expert", e:"🎓"},
       {w:"शाबाश", r:"shaabaash", m:"well done", e:"👏"},
       {w:"किताब", r:"kitaab", m:"book", e:"📖"},
-      {w:"पानी", r:"paanee", m:"water", e:"💧"}
+      {w:"पानी", r:"paanee", m:"water", e:"💧"},
+      {w:"होशियार", r:"hoshiyaar", m:"clever", e:"🧠"},
+      {w:"खुश", r:"khush", m:"happy", e:"😄"},
+      {w:"बधाई", r:"badhaai", m:"congrats", e:"🎉"},
+      {w:"स्टार", r:"staar", m:"star", e:"⭐"},
+      {w:"दोस्त", r:"dost", m:"friend", e:"🤝"},
+      {w:"पढ़ाई", r:"padhaai", m:"studies", e:"📚"}
     ],
     sentences: [
       {s:"मैं हिंदी पढ़ सकती हूँ।", r:"main hindee padh saktee hoon", m:"I can read Hindi."},
