@@ -272,4 +272,52 @@ button{font-family:inherit; cursor:pointer; border:none;}
 .node .dnum.date{font-size:.92rem; font-weight:900; color:var(--purple); text-align:center; line-height:1.05;}
 .node.today .dnum.date{color:var(--pink);}
 
-@media(min-width:480px){ .map{grid-template-columns:repeat(5,1fr);} }
+/* ---------- Explore bar (home) + sections ---------- */
+.explore{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:2px 0 4px;}
+.exbtn{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  min-height:92px; padding:10px 6px; border-radius:18px; color:#fff;
+  box-shadow:0 5px 0 rgba(0,0,0,.14); text-align:center;
+}
+.exbtn:active{transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.14);}
+.exbtn .exi{font-size:1.9rem; line-height:1;}
+.exbtn .ext b{font-size:.82rem; display:block; line-height:1.1;}
+.exbtn .ext small{font-size:.6rem; opacity:.9;}
+.exbtn.n{background:linear-gradient(160deg,#38b6ff,#3f7bff);}
+.exbtn.d{background:linear-gradient(160deg,#37c871,#0aa06a);}
+.exbtn.m{background:linear-gradient(160deg,#ff922b,#ff5d8f);}
+
+/* Numbers grid */
+.numhead{
+  margin:14px 2px 6px; font-weight:900; color:var(--purple); font-size:1rem;
+  display:flex; align-items:center; gap:6px; cursor:pointer;
+}
+.numgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:8px;}
+.numtile{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height:62px; border-radius:14px; background:linear-gradient(160deg,#fff,#eef6ff);
+  border:2px solid #cfe6ff; box-shadow:0 4px 0 #cfe6ff; color:var(--ink); padding:4px;
+}
+.numtile:active{transform:translateY(2px); box-shadow:0 2px 0 #cfe6ff;}
+.numtile .nd{font-size:1.5rem; font-weight:900; line-height:1;}
+.numtile .nw{font-size:.62rem; font-weight:700; opacity:.7; margin-top:2px; text-align:center;}
+
+/* Weekday / Month cards */
+.cardlist{display:flex; flex-direction:column; gap:10px; margin-top:10px;}
+.explore-card{
+  display:flex; align-items:center; gap:14px; width:100%; text-align:left;
+  background:linear-gradient(160deg,#fff,#fff5fb); border:3px solid #ffe0ee; border-radius:18px;
+  padding:12px 14px; box-shadow:0 5px 0 #ffe0ee; color:var(--ink); position:relative;
+}
+.explore-card:active{transform:translateY(3px); box-shadow:0 2px 0 #ffe0ee;}
+.explore-card .ec-em{font-size:2rem;}
+.explore-card .ec-txt{flex:1;}
+.explore-card .ec-txt b{font-size:1.5rem; font-weight:900; display:block; line-height:1.1;}
+.explore-card .ec-txt small{font-size:.8rem; font-weight:700; color:var(--purple); opacity:.85;}
+.explore-card .ec-num{font-size:1.4rem; font-weight:900; color:#bbb;}
+.explore-card.today{border-color:var(--green); background:linear-gradient(160deg,#fff,#e9ffef); box-shadow:0 5px 0 #b7f0c8;}
+.explore-card .ec-tag{position:absolute; top:8px; right:10px; background:var(--green); color:#fff; font-size:.66rem; font-weight:900; padding:3px 9px; border-radius:999px;}
+
+.btn.big.warn{background:var(--orange); width:100%;}
+
+@media(min-width:480px){ .map{grid-template-columns:repeat(5,1fr);} .numgrid{grid-template-columns:repeat(10,1fr);} }

@@ -22,6 +22,12 @@ mastering every *maatra* (vowel sign) — with a strong focus on **pronunciation
   encouraging (graceful fallback if the browser can't listen).
 - **6 fun games:** Listen &amp; Tap, Picture Match, Build-the-Word, Maatra Detective, Make-a-Sentence,
   and Read-Aloud flashcards.
+- **🧭 Explore anytime (Numbers, Weekdays, Months).** Three always-open sections on the home
+  screen, separate from the daily lesson:
+  - **🔢 Numbers 1–100** — every number in Devanagari + Hindi word, tap to hear, count-along
+    buttons, and a "which number?" listen-&-tap game.
+  - **📅 Weekdays** — all seven days (today highlighted), tap to hear, and a day game.
+  - **🗓️ Months** — all twelve months (this month highlighted), tap to hear, and a month game.
 - **Rewards:** stars, confetti, weekly badges ⭐, and a Day-31 **Hindi Reader certificate** 🎓.
 - **Works on her phone.** Mobile-first, big buttons, offline after first load. Add to Home Screen.
 

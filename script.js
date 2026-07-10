@@ -368,6 +368,18 @@
     bonus.appendChild(sayB);
     $app.appendChild(bonus);
 
+    // Explore sections — open anytime (numbers, weekdays, months)
+    $app.appendChild(el("div", "h", "🧭 सीखो और खोजो · Explore"));
+    const ex = el("div", "explore");
+    const exBtn = (cls, icon, hi, en, fn) => {
+      const b = el("button", "exbtn " + cls, '<span class="exi">' + icon + '</span><span class="ext"><b>' + hi + '</b><small>' + en + '</small></span>');
+      b.onclick = fn; return b;
+    };
+    ex.appendChild(exBtn("n", "🔢", "गिनती १–१००", "Numbers 1–100", renderNumbers));
+    ex.appendChild(exBtn("d", "📅", "हफ़्ते के दिन", "Weekdays", renderWeekdays));
+    ex.appendChild(exBtn("m", "🗓️", "साल के महीने", "Months", renderMonths));
+    $app.appendChild(ex);
+
     // journey heading + big Play button for today
     $app.appendChild(el("div", "h", "🗺️ तुम्हारा सफ़र · Your Journey"));
     const play = el("button", "btn big next", "▶️ आज का पाठ · " + fmtDateLong(dateForDay(unlocked)));
@@ -870,6 +882,183 @@
     render();
   }
 
+  /* =======================================================================
+     EXPLORE  —  standalone sections Myra can open anytime (not day-gated):
+     Numbers 1–100, Weekdays, and Months. Tap anything to hear it in Hindi,
+     count along, and play a quick listen-&-tap quiz.
+     ===================================================================== */
+  // Hindi numbers 1..100 as "word|roman" (index 0 = number 1)
+  const NUM_RAW = (
+    "एक|ek दो|do तीन|teen चार|chaar पाँच|paanch छह|chhah सात|saat आठ|aath नौ|nau दस|das " +
+    "ग्यारह|gyaarah बारह|baarah तेरह|terah चौदह|chaudah पंद्रह|pandrah सोलह|solah सत्रह|satrah अठारह|athaarah उन्नीस|unnees बीस|bees " +
+    "इक्कीस|ikkees बाईस|baaees तेईस|teees चौबीस|chaubees पच्चीस|pachchees छब्बीस|chhabbees सत्ताईस|sattaaees अट्ठाईस|atthaaees उनतीस|untees तीस|tees " +
+    "इकतीस|iktees बत्तीस|battees तैंतीस|taintees चौंतीस|chauntees पैंतीस|paintees छत्तीस|chhattees सैंतीस|saintees अड़तीस|adtees उनतालीस|untaalees चालीस|chaalees " +
+    "इकतालीस|iktaalees बयालीस|bayaalees तैंतालीस|taintaalees चवालीस|chavaalees पैंतालीस|paintaalees छियालीस|chhiyaalees सैंतालीस|saintaalees अड़तालीस|adtaalees उनचास|unchaas पचास|pachaas " +
+    "इक्यावन|ikyaavan बावन|baavan तिरेपन|tirepan चौवन|chauvan पचपन|pachpan छप्पन|chhappan सत्तावन|sattaavan अट्ठावन|atthaavan उनसठ|unsath साठ|saath " +
+    "इकसठ|iksath बासठ|baasath तिरेसठ|tiresath चौंसठ|chaunsath पैंसठ|painsath छियासठ|chhiyaasath सड़सठ|sadsath अड़सठ|adsath उनहत्तर|unhattar सत्तर|sattar " +
+    "इकहत्तर|ikhattar बहत्तर|bahattar तिहत्तर|tihattar चौहत्तर|chauhattar पचहत्तर|pachhattar छिहत्तर|chhihattar सतहत्तर|satahattar अठहत्तर|athhattar उनासी|unaasee अस्सी|assee " +
+    "इक्यासी|ikyaasee बयासी|bayaasee तिरासी|tiraasee चौरासी|chauraasee पचासी|pachaasee छियासी|chhiyaasee सत्तासी|sattaasee अट्ठासी|atthaasee नवासी|navaasee नब्बे|nabbe " +
+    "इक्यानवे|ikyaanave बानवे|baanave तिरानवे|tiraanave चौरानवे|chauraanave पचानवे|pachaanave छियानवे|chhiyaanave सत्तानवे|sattaanave अट्ठानवे|atthaanave निन्यानवे|ninyaanave सौ|sau"
+  ).split(/\s+/).map(s => { const p = s.split("|"); return { w: p[0], r: p[1] }; });
+  const DEV_DIG = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+  function toDev(n) { return String(n).split("").map(c => /\d/.test(c) ? DEV_DIG[+c] : c).join(""); }
+  const WEEKDAYS = [
+    { w: "रविवार", r: "ravivaar", e: "Sunday", em: "☀️" },
+    { w: "सोमवार", r: "somvaar", e: "Monday", em: "🌙" },
+    { w: "मंगलवार", r: "mangalvaar", e: "Tuesday", em: "🔴" },
+    { w: "बुधवार", r: "budhvaar", e: "Wednesday", em: "🟢" },
+    { w: "गुरुवार", r: "guruvaar", e: "Thursday", em: "🟡" },
+    { w: "शुक्रवार", r: "shukravaar", e: "Friday", em: "⭐" },
+    { w: "शनिवार", r: "shanivaar", e: "Saturday", em: "🪐" }
+  ];
+  const MONTHS = [
+    { w: "जनवरी", r: "janvaree", e: "January", em: "❄️" }, { w: "फ़रवरी", r: "farvaree", e: "February", em: "💗" },
+    { w: "मार्च", r: "maarch", e: "March", em: "🌱" }, { w: "अप्रैल", r: "aprail", e: "April", em: "🌸" },
+    { w: "मई", r: "maee", e: "May", em: "☀️" }, { w: "जून", r: "joon", e: "June", em: "🌻" },
+    { w: "जुलाई", r: "julaaee", e: "July", em: "🌦️" }, { w: "अगस्त", r: "agast", e: "August", em: "🌈" },
+    { w: "सितंबर", r: "sitambar", e: "September", em: "🍂" }, { w: "अक्टूबर", r: "aktoobar", e: "October", em: "🎃" },
+    { w: "नवंबर", r: "navambar", e: "November", em: "🍁" }, { w: "दिसंबर", r: "disambar", e: "December", em: "🎄" }
+  ];
+
+  function speakMany(texts) {
+    if (!window.speechSynthesis) return;
+    try {
+      speechSynthesis.cancel();
+      texts.forEach(t => { const u = new SpeechSynthesisUtterance(t); u.lang = "hi-IN"; if (hiVoice) u.voice = hiVoice; u.rate = 0.7; u.pitch = 1.12; speechSynthesis.speak(u); });
+    } catch (e) {}
+  }
+  function bonusStar() { state.total = (state.total || 0) + 1; save(); }
+
+  function exploreShell(titleHi, titleEn, bodyBuilder) {
+    window.scrollTo(0, 0);
+    $app.innerHTML = "";
+    const head = el("div", "lesson-top");
+    const back = el("button", "back", "←");
+    back.onclick = renderHome;
+    head.appendChild(back);
+    head.appendChild(el("h2", null, titleHi + "<small>" + titleEn + "</small>"));
+    $app.appendChild(head);
+    const stage = el("div", "stage");
+    $app.appendChild(stage);
+    bodyBuilder(stage);
+    renderFooter();
+  }
+
+  /* listen-&-tap quiz over a pool of {say, opt, key} */
+  function exploreQuiz(pool, cfg) {
+    const rounds = shuffle(pool).slice(0, Math.min(cfg.rounds || 5, pool.length));
+    let r = 0, correct = 0;
+    function finish() {
+      exploreShell(cfg.titleHi, cfg.titleEn, (stage) => {
+        const wrap = el("div", "reward");
+        wrap.innerHTML = '<div class="trophy">' + (correct >= rounds.length ? "🏆" : "🌟") + "</div>" +
+          "<h2>" + praise() + "</h2>" +
+          '<div class="earned">' + "⭐".repeat(Math.min(5, Math.max(1, correct))) + "</div>" +
+          "<p>" + toDev(correct) + " / " + toDev(rounds.length) + " सही! " + APP.child.hindi + "</p>";
+        stage.appendChild(wrap);
+        const again = el("button", "btn ghost big", "🔁 फिर से खेलो"); again.onclick = () => exploreQuiz(pool, cfg);
+        const back = el("button", "btn big next", "← वापस"); back.onclick = cfg.onDone || renderHome;
+        stage.appendChild(again); stage.appendChild(el("div", "", "<br>")); stage.appendChild(back);
+        celebrate("शाबाश!"); speak(praise());
+      });
+    }
+    function round() {
+      const target = rounds[r];
+      const opts = shuffle([target].concat(sample(pool, Math.min(3, pool.length - 1), target)));
+      exploreShell(cfg.titleHi, cfg.titleEn, (stage) => {
+        stage.appendChild(el("div", "game-q", cfg.q + " 👂 (" + (r + 1) + "/" + rounds.length + ")"));
+        const rep = el("button", "btn speak", "🔊 फिर से सुनो"); rep.onclick = () => speak(target.say);
+        stage.appendChild(rep);
+        const grid = el("div", "opts"); grid.style.marginTop = "10px";
+        opts.forEach((o) => {
+          const b = el("button", "opt", o.opt);
+          b.onclick = () => {
+            if (o.key === target.key) { b.classList.add("right"); celebrate(praise()); speak(praise()); correct++; bonusStar(); r++; setTimeout(() => r < rounds.length ? round() : finish(), 900); }
+            else { b.classList.add("wrong"); toast("फिर से सुनो", false); speak(target.say); setTimeout(() => b.classList.remove("wrong"), 500); }
+          };
+          grid.appendChild(b);
+        });
+        stage.appendChild(grid);
+      });
+      setTimeout(() => speak(target.say), 420);
+    }
+    round();
+  }
+
+  /* ---- Numbers 1–100 ---- */
+  function renderNumbers() {
+    exploreShell("🔢 गिनती १–१००", "Numbers 1–100 in Hindi", (stage) => {
+      stage.appendChild(el("div", "game-q", "किसी भी नंबर को दबाओ और सुनो 👆<br><small>Tap any number to hear it</small>"));
+      const row = el("div", "opts"); row.style.gridTemplateColumns = "1fr 1fr";
+      const c1 = el("button", "btn speak", "🔊 १ से १० गिनो"); c1.onclick = () => speakMany(NUM_RAW.slice(0, 10).map(x => x.w));
+      const c2 = el("button", "btn speak", "🔊 १०,२०…१००"); c2.onclick = () => speakMany([10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(n => NUM_RAW[n - 1].w));
+      row.appendChild(c1); row.appendChild(c2); stage.appendChild(row);
+      for (let g = 0; g < 10; g++) {
+        const start = g * 10 + 1, end = g * 10 + 10;
+        const head = el("div", "numhead", toDev(start) + " – " + toDev(end) + " 🔊");
+        head.onclick = () => speakMany(NUM_RAW.slice(start - 1, end).map(x => x.w));
+        stage.appendChild(head);
+        const grid = el("div", "numgrid");
+        for (let n = start; n <= end; n++) {
+          const it = NUM_RAW[n - 1];
+          const t = el("button", "numtile", '<span class="nd">' + toDev(n) + '</span><span class="nw">' + it.w + "</span>");
+          t.onclick = () => { speak(it.w); t.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 240 }); };
+          grid.appendChild(t);
+        }
+        stage.appendChild(grid);
+      }
+      const quizNums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,30,40,50,60,70,80,90,100];
+      const pool = quizNums.map(n => ({ say: NUM_RAW[n - 1].w, opt: '<span class="nd">' + toDev(n) + "</span>", key: n }));
+      const quiz = el("button", "btn big warn", "🎮 नंबर पहचानो · Number Game");
+      quiz.onclick = () => exploreQuiz(pool, { titleHi: "🔢 नंबर पहचानो", titleEn: "Which number?", q: "कौन सा नंबर बोला?", rounds: 6, onDone: renderNumbers });
+      stage.appendChild(el("div", "", "<br>")); stage.appendChild(quiz);
+    });
+  }
+
+  /* ---- Weekdays ---- */
+  function renderWeekdays() {
+    const todayIdx = new Date().getDay();
+    exploreShell("📅 हफ़्ते के दिन", "Days of the week", (stage) => {
+      stage.appendChild(el("div", "game-q", "आज है: <b>" + WEEKDAYS[todayIdx].w + "</b> " + WEEKDAYS[todayIdx].em + "<br><small>Tap a day to hear it</small>"));
+      const say = el("button", "btn speak", "🔊 सातों दिन सुनो"); say.onclick = () => speakMany(WEEKDAYS.map(d => d.w));
+      stage.appendChild(say);
+      const list = el("div", "cardlist");
+      WEEKDAYS.forEach((d, i) => {
+        const card = el("button", "explore-card" + (i === todayIdx ? " today" : ""),
+          '<span class="ec-em">' + d.em + '</span><span class="ec-txt"><b>' + d.w + '</b><small>' + d.r + " · " + d.e + "</small></span>" + (i === todayIdx ? '<span class="ec-tag">आज</span>' : ""));
+        card.onclick = () => { speak(d.w); };
+        list.appendChild(card);
+      });
+      stage.appendChild(list);
+      const pool = WEEKDAYS.map(d => ({ say: d.w, opt: '<span style="font-size:1.2rem">' + d.w + "</span>", key: d.w }));
+      const quiz = el("button", "btn big warn", "🎮 दिन पहचानो · Day Game");
+      quiz.onclick = () => exploreQuiz(pool, { titleHi: "📅 दिन पहचानो", titleEn: "Which day?", q: "कौन सा दिन बोला?", rounds: 5, onDone: renderWeekdays });
+      stage.appendChild(el("div", "", "<br>")); stage.appendChild(quiz);
+    });
+  }
+
+  /* ---- Months ---- */
+  function renderMonths() {
+    const monIdx = new Date().getMonth();
+    exploreShell("🗓️ साल के महीने", "Months of the year", (stage) => {
+      stage.appendChild(el("div", "game-q", "यह महीना: <b>" + MONTHS[monIdx].w + "</b> " + MONTHS[monIdx].em + "<br><small>Tap a month to hear it</small>"));
+      const say = el("button", "btn speak", "🔊 बारह महीने सुनो"); say.onclick = () => speakMany(MONTHS.map(m => m.w));
+      stage.appendChild(say);
+      const list = el("div", "cardlist");
+      MONTHS.forEach((m, i) => {
+        const card = el("button", "explore-card" + (i === monIdx ? " today" : ""),
+          '<span class="ec-em">' + m.em + '</span><span class="ec-txt"><b>' + m.w + '</b><small>' + m.r + " · " + m.e + "</small></span><span class=\"ec-num\">" + toDev(i + 1) + "</span>" + (i === monIdx ? '<span class="ec-tag">अभी</span>' : ""));
+        card.onclick = () => { speak(m.w); };
+        list.appendChild(card);
+      });
+      stage.appendChild(list);
+      const pool = MONTHS.map(m => ({ say: m.w, opt: '<span style="font-size:1.1rem">' + m.w + "</span>", key: m.w }));
+      const quiz = el("button", "btn big warn", "🎮 महीना पहचानो · Month Game");
+      quiz.onclick = () => exploreQuiz(pool, { titleHi: "🗓️ महीना पहचानो", titleEn: "Which month?", q: "कौन सा महीना बोला?", rounds: 6, onDone: renderMonths });
+      stage.appendChild(el("div", "", "<br>")); stage.appendChild(quiz);
+    });
+  }
+
   /* ------------------------------- footer -------------------------------- */
   function renderFooter() {
     $footer.innerHTML = "";
@@ -888,6 +1077,7 @@
       "<p><b>🎤 Say it:</b> lets her speak the word — always encouraging" + (canListen ? "." : " (not supported on this browser).") + "</p>" +
       "<p><b>✍️ Trace &amp; write:</b> Myra hears “letter + maatra”, traces the faint guide with her finger, and taps ✅ — the app checks it gently and cheers her on. Great for building handwriting.</p>" +
       "<p><b>🗣️ Translate &amp; speak:</b> she reads an English sentence and says it in Hindi; the app listens (🎤) and grades 10 sentences a day" + (canListen ? "." : " (self-marked if this browser can't listen).") + " Tap 🔊 उत्तर सुनो to hear the answer, 👀 to reveal it.</p>" +
+      "<p><b>🧭 Explore anytime:</b> tap 🔢 Numbers (1–100), 📅 Weekdays, or 🗓️ Months on the home screen — Myra can hear each one, count along, and play a quick number/day/month game. These are always open, separate from the daily lesson.</p>" +
       "<p><b>One lesson a day:</b> a new day unlocks every morning for 31 days — from vowels to reading full words.</p>" +
       "<p><b>Add to Home Screen</b> for an app feel (Share → Add to Home Screen).</p>";
     const c = el("button", "btn big next", "ठीक है ✓"); c.onclick = () => ov.remove();
