@@ -375,7 +375,7 @@
       const b = el("button", "exbtn " + cls, '<span class="exi">' + icon + '</span><span class="ext"><b>' + hi + '</b><small>' + en + '</small></span>');
       b.onclick = fn; return b;
     };
-    ex.appendChild(exBtn("n", "🔢", "गिनती १–१००", "Numbers 1–100", renderNumbers));
+    ex.appendChild(exBtn("n", "🔢", "गिनती 1–100", "Numbers 1–100", renderNumbers));
     ex.appendChild(exBtn("d", "📅", "हफ़्ते के दिन", "Weekdays", renderWeekdays));
     ex.appendChild(exBtn("m", "🗓️", "साल के महीने", "Months", renderMonths));
     $app.appendChild(ex);
@@ -900,8 +900,6 @@
     "इक्यासी|ikyaasee बयासी|bayaasee तिरासी|tiraasee चौरासी|chauraasee पचासी|pachaasee छियासी|chhiyaasee सत्तासी|sattaasee अट्ठासी|atthaasee नवासी|navaasee नब्बे|nabbe " +
     "इक्यानवे|ikyaanave बानवे|baanave तिरानवे|tiraanave चौरानवे|chauraanave पचानवे|pachaanave छियानवे|chhiyaanave सत्तानवे|sattaanave अट्ठानवे|atthaanave निन्यानवे|ninyaanave सौ|sau"
   ).split(/\s+/).map(s => { const p = s.split("|"); return { w: p[0], r: p[1] }; });
-  const DEV_DIG = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
-  function toDev(n) { return String(n).split("").map(c => /\d/.test(c) ? DEV_DIG[+c] : c).join(""); }
   const WEEKDAYS = [
     { w: "रविवार", r: "ravivaar", e: "Sunday", em: "☀️" },
     { w: "सोमवार", r: "somvaar", e: "Monday", em: "🌙" },
@@ -954,7 +952,7 @@
         wrap.innerHTML = '<div class="trophy">' + (correct >= rounds.length ? "🏆" : "🌟") + "</div>" +
           "<h2>" + praise() + "</h2>" +
           '<div class="earned">' + "⭐".repeat(Math.min(5, Math.max(1, correct))) + "</div>" +
-          "<p>" + toDev(correct) + " / " + toDev(rounds.length) + " सही! " + APP.child.hindi + "</p>";
+          "<p>" + correct + " / " + rounds.length + " सही! " + APP.child.hindi + "</p>";
         stage.appendChild(wrap);
         const again = el("button", "btn ghost big", "🔁 फिर से खेलो"); again.onclick = () => exploreQuiz(pool, cfg);
         const back = el("button", "btn big next", "← वापस"); back.onclick = cfg.onDone || renderHome;
@@ -987,28 +985,28 @@
 
   /* ---- Numbers 1–100 ---- */
   function renderNumbers() {
-    exploreShell("🔢 गिनती १–१००", "Numbers 1–100 in Hindi", (stage) => {
-      stage.appendChild(el("div", "game-q", "किसी भी नंबर को दबाओ और सुनो 👆<br><small>Tap any number to hear it</small>"));
+    exploreShell("🔢 गिनती 1–100", "Numbers 1–100 in Hindi", (stage) => {
+      stage.appendChild(el("div", "game-q", "नंबर दबाओ और हिंदी में सुनो 👆<br><small>1 → एक, 2 → दो, 3 → तीन … tap to hear the Hindi word</small>"));
       const row = el("div", "opts"); row.style.gridTemplateColumns = "1fr 1fr";
-      const c1 = el("button", "btn speak", "🔊 १ से १० गिनो"); c1.onclick = () => speakMany(NUM_RAW.slice(0, 10).map(x => x.w));
-      const c2 = el("button", "btn speak", "🔊 १०,२०…१००"); c2.onclick = () => speakMany([10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(n => NUM_RAW[n - 1].w));
+      const c1 = el("button", "btn speak", "🔊 1 से 10 गिनो"); c1.onclick = () => speakMany(NUM_RAW.slice(0, 10).map(x => x.w));
+      const c2 = el("button", "btn speak", "🔊 10,20…100"); c2.onclick = () => speakMany([10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(n => NUM_RAW[n - 1].w));
       row.appendChild(c1); row.appendChild(c2); stage.appendChild(row);
       for (let g = 0; g < 10; g++) {
         const start = g * 10 + 1, end = g * 10 + 10;
-        const head = el("div", "numhead", toDev(start) + " – " + toDev(end) + " 🔊");
+        const head = el("div", "numhead", start + " – " + end + " 🔊");
         head.onclick = () => speakMany(NUM_RAW.slice(start - 1, end).map(x => x.w));
         stage.appendChild(head);
         const grid = el("div", "numgrid");
         for (let n = start; n <= end; n++) {
           const it = NUM_RAW[n - 1];
-          const t = el("button", "numtile", '<span class="nd">' + toDev(n) + '</span><span class="nw">' + it.w + "</span>");
+          const t = el("button", "numtile", '<span class="nd">' + n + '</span><span class="nw">' + it.w + '</span><span class="nr">' + it.r + "</span>");
           t.onclick = () => { speak(it.w); t.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 240 }); };
           grid.appendChild(t);
         }
         stage.appendChild(grid);
       }
       const quizNums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,30,40,50,60,70,80,90,100];
-      const pool = quizNums.map(n => ({ say: NUM_RAW[n - 1].w, opt: '<span class="nd">' + toDev(n) + "</span>", key: n }));
+      const pool = quizNums.map(n => ({ say: NUM_RAW[n - 1].w, opt: '<span class="nd">' + n + "</span>", key: n }));
       const quiz = el("button", "btn big warn", "🎮 नंबर पहचानो · Number Game");
       quiz.onclick = () => exploreQuiz(pool, { titleHi: "🔢 नंबर पहचानो", titleEn: "Which number?", q: "कौन सा नंबर बोला?", rounds: 6, onDone: renderNumbers });
       stage.appendChild(el("div", "", "<br>")); stage.appendChild(quiz);
@@ -1047,7 +1045,7 @@
       const list = el("div", "cardlist");
       MONTHS.forEach((m, i) => {
         const card = el("button", "explore-card" + (i === monIdx ? " today" : ""),
-          '<span class="ec-em">' + m.em + '</span><span class="ec-txt"><b>' + m.w + '</b><small>' + m.r + " · " + m.e + "</small></span><span class=\"ec-num\">" + toDev(i + 1) + "</span>" + (i === monIdx ? '<span class="ec-tag">अभी</span>' : ""));
+          '<span class="ec-em">' + m.em + '</span><span class="ec-txt"><b>' + m.w + '</b><small>' + m.r + " · " + m.e + "</small></span><span class=\"ec-num\">" + (i + 1) + "</span>" + (i === monIdx ? '<span class="ec-tag">अभी</span>' : ""));
         card.onclick = () => { speak(m.w); };
         list.appendChild(card);
       });
